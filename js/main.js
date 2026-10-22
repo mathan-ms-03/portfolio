@@ -12,8 +12,8 @@ const projectData = {
     duration: 'Academic Project & Prototype',
     role: 'Lead Full-Stack Developer',
     image: 'assets/images/placement-system.jpg',
-    github: 'https://github.com/mathan-ms-03',
-    demo: '#',
+    github: 'https://github.com/mathan-ms-03/placement-management-system',
+    demo: 'https://github.com/mathan-ms-03/placement-management-system',
     techStack: ['React.js', 'Node.js', 'Express.js', 'MySQL', 'REST API', 'JWT Auth', 'CSS3'],
     overview: 'The Placement Management System is a centralized, role-based web platform designed for higher education institutions to modernize the campus placement cycle. It bridges the gap between graduating students, campus placement officers, and corporate recruiters by replacing manual spreadsheets with automated workflows.',
     features: [
@@ -36,8 +36,8 @@ const projectData = {
     duration: 'Personal & Showcase Project',
     role: 'Frontend & Backend Developer',
     image: 'assets/images/phone-store.jpg',
-    github: 'https://github.com/mathan-ms-03',
-    demo: '#',
+    github: 'https://github.com/mathan-ms-03/e-commerce',
+    demo: 'https://github.com/mathan-ms-03/e-commerce',
     techStack: ['HTML5', 'CSS3 / Flexbox & Grid', 'JavaScript (ES6+)', 'Node.js', 'MySQL', 'LocalStorage API'],
     overview: 'A sleek, mobile-first e-commerce web application engineered to deliver a frictionless smartphone discovery and purchasing experience. Features instant client-side search, brand/price multi-facet filtering, dynamic cart management, and responsive product showcase modals.',
     features: [

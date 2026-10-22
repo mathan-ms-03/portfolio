@@ -1,9 +1,10 @@
 # 🌟 Mathan S — Full Stack Developer Portfolio & Project Showcase
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live%20Showcase-06b6d4?style=for-the-badge&logo=vercel)](https://mathan-ms-03.github.io/portfolio/)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-mathan--ms--03-6366f1?style=for-the-badge&logo=github)](https://github.com/mathan-ms-03)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-mathan--ms--03-6366f1?style=for-the-badge&logo=github)](https://github.com/mathan-ms-03)
+[![Placement Management System](https://img.shields.io/badge/Repo-Placement%20System-06b6d4?style=for-the-badge&logo=github)](https://github.com/mathan-ms-03/placement-management-system)
+[![Phone E-Commerce](https://img.shields.io/badge/Repo-Phone%20Store-8b5cf6?style=for-the-badge&logo=github)](https://github.com/mathan-ms-03/e-commerce)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Open%20for%20Opportunities-8b5cf6?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Open%20for%20Opportunities-f59e0b?style=for-the-badge)]()
 
 A sleek, ultra-responsive modern developer portfolio and technical project showcase tailored for **Mathan S**, an aspiring **Full Stack Developer** and Computer Science undergraduate at **Adithya Institute of Technology** (CGPA: 7.04).
 
