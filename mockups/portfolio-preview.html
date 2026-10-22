@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathan S — Full Stack Developer Portfolio Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: #07090e;
+      color: #f1f5f9;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* macOS Browser Frame Top Bar */
+    .browser-frame-bar {
+      height: 38px;
+      background: #0f1422;
+      border-bottom: 1px solid #1e263d;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .browser-url-bar {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      background: #161c2e;
+      border: 1px solid #232d47;
+      border-radius: 5px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .browser-url-bar span {
+      color: #e2e8f0;
+    }
+
+    /* Main Portfolio Container */
+    .portfolio-viewport {
+      flex: 1;
+      overflow-y: auto;
+      background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15), transparent 45%),
+                  radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.12), transparent 40%),
+                  #07090e;
+    }
+
+    /* Header */
+    .nav-header {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .nav-menu span.active {
+      color: #38bdf8;
+    }
+
+    .nav-btn-resume {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11.5px;
+    }
+
+    /* Hero Section */
+    .hero-content {
+      padding: 24px 28px 18px;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #34d399;
+      margin-bottom: 14px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .gradient-name {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+
+    .typed-role {
+      color: #38bdf8;
+      border-right: 2px solid #38bdf8;
+      padding-right: 3px;
+    }
+
+    .hero-bio {
+      font-size: 12.5px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .hero-bio strong {
+      color: #f1f5f9;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-hero-primary {
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-hero-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Hero Visual Card */
+    .hero-portrait-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .portrait-halo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      padding: 3px;
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #1e293b;
+    }
+
+    .tech-chip {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .chip-react { top: 0px; left: 0px; color: #38bdf8; }
+    .chip-node { top: 10px; right: 0px; color: #818cf8; }
+    .chip-mysql { bottom: 0px; right: 20px; color: #34d399; }
+
+    /* Stats Bar */
+    .stats-strip {
+      margin: 8px 28px 20px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+    }
+
+    .stat-strip-item {
+      border-right: 1px solid #1e293b;
+    }
+
+    .stat-strip-item:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+    }
+
+    .stat-num span {
+      color: #38bdf8;
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+
+    /* Bottom Featured Projects Preview */
+    .showcase-row {
+      margin: 0 28px 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .project-mini-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mini-card-info h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .mini-card-info p {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .mini-card-pills {
+      display: flex;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .mini-pill {
+      background: #1e293b;
+      color: #cbd5e1;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top macOS Chrome Bar -->
+  <div class="browser-frame-bar">
+    <div class="window-dots">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+    </div>
+    <div class="browser-url-bar">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <span>https://mathan-ms-03.github.io/portfolio/</span>
+    </div>
+  </div>
+
+  <!-- Portfolio Viewport -->
+  <div class="portfolio-viewport">
+    <header class="nav-header">
+      <div class="nav-logo">
+        <span class="logo-badge">&lt;M/&gt;</span>
+        <span>Mathan<span style="color: #38bdf8;">.dev</span></span>
+      </div>
+      <nav class="nav-menu">
+        <span class="active">Home</span>
+        <span>About</span>
+        <span>Skills</span>
+        <span>Experience</span>
+        <span>Projects</span>
+        <span>Certificates</span>
+      </nav>
+      <div class="nav-btn-resume">📄 Resume (7.04 CGPA)</div>
+    </header>
+
+    <!-- Hero Content -->
+    <section class="hero-content">
+      <div class="hero-text-box">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Available for Full-Stack Developer Roles</span>
+        </div>
+        <h1 class="hero-title">Hi, I'm <span class="gradient-name">Mathan S</span></h1>
+        <div class="hero-subtitle">
+          Crafting solutions as a <span class="typed-role">Full Stack Developer</span>
+        </div>
+        <p class="hero-bio">
+          Computer Science Engineer at <strong>Adithya Institute of Technology</strong>, Coimbatore (Batch of 2023–2027, <strong>7.04 CGPA</strong>). Hands-on experience building enterprise web systems, REST APIs, and responsive architectures with <strong>React.js, Node.js, Express.js, and MySQL</strong>.
+        </p>
+        <div class="hero-cta-row">
+          <div class="btn-hero-primary">
+            <span>Explore Projects</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="btn-hero-outline">View Case Studies</div>
+        </div>
+      </div>
+
+      <div class="hero-portrait-box">
+        <div class="portrait-halo">
+          <img src="../assets/images/avatar.jpeg" alt="Mathan S" class="portrait-img" onerror="this.src='../assets/images/avatar.jpg'">
+        </div>
+        <div class="tech-chip chip-react">⚡ React.js</div>
+        <div class="tech-chip chip-node">📦 Node.js</div>
+        <div class="tech-chip chip-mysql">🗄️ MySQL</div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-strip">
+      <div class="stat-strip-item">
+        <div class="stat-num">2<span>+</span></div>
+        <div class="stat-lbl">Production Projects</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num">7<span>+</span></div>
+        <div class="stat-lbl">Verified Certifications</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num">1<span>+</span></div>
+        <div class="stat-lbl">Wee Qub Internship</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num">7.04<span>★</span></div>
+        <div class="stat-lbl">Engineering CGPA</div>
+      </div>
+    </div>
+
+    <!-- Featured Projects Preview Row -->
+    <div class="showcase-row">
+      <div class="project-mini-card">
+        <div class="mini-card-info">
+          <h4>Placement Management System</h4>
+          <p>Campus recruitment candidate pipeline & eligibility automation</p>
+          <div class="mini-card-pills">
+            <span class="mini-pill">React.js</span>
+            <span class="mini-pill">Node.js</span>
+            <span class="mini-pill">Express</span>
+            <span class="mini-pill">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-mini-card">
+        <div class="mini-card-info">
+          <h4>Phone Shopping E-Commerce</h4>
+          <p>Flagship smartphone store with instant filtering & cart sync</p>
+          <div class="mini-card-pills">
+            <span class="mini-pill">HTML5/CSS3</span>
+            <span class="mini-pill">JavaScript ES6+</span>
+            <span class="mini-pill">Node.js</span>
+            <span class="mini-pill">MySQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

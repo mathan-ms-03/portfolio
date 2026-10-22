@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Placement Management System — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: #080c14;
+      color: #e2e8f0;
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #0d1321;
+      border-right: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+    }
+
+    .brand-info h1 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-info p {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .nav-group {
+      padding: 14px 8px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #475569;
+      font-weight: 700;
+      padding: 6px 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      transition: all 0.2s;
+    }
+
+    .nav-item.active {
+      background: rgba(6, 182, 212, 0.12);
+      color: #38bdf8;
+      border-left: 3px solid #06b6d4;
+    }
+
+    .nav-item .badge {
+      margin-left: auto;
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .nav-item.active .badge {
+      background: rgba(6, 182, 212, 0.2);
+      color: #38bdf8;
+    }
+
+    .sidebar-footer {
+      padding: 12px 14px;
+      border-top: 1px solid #1e293b;
+      background: #090e1a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .user-details h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .user-details p {
+      font-size: 10px;
+      color: #64748b;
+    }
+
+    /* Main Area */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* Top Navigation */
+    .topbar {
+      height: 56px;
+      background: #0d1321;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #131b2e;
+      border: 1px solid #23314d;
+      padding: 6px 12px;
+      border-radius: 6px;
+      width: 290px;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .search-box kbd {
+      margin-left: auto;
+      background: #1e293b;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .college-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #a5b4fc;
+    }
+
+    .college-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+    }
+
+    .btn-create {
+      background: linear-gradient(135deg, #06b6d4, #0284c7);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .page-title h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+    }
+
+    .page-title p {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 1px;
+    }
+
+    .date-filter {
+      display: flex;
+      gap: 6px;
+    }
+
+    .date-pill {
+      background: #131b2e;
+      border: 1px solid #23314d;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .date-pill.active {
+      background: #06b6d4;
+      color: #fff;
+      border-color: #06b6d4;
+    }
+
+    /* KPI Stats Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 12px 14px;
+      position: relative;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #334155;
+    }
+
+    .kpi-card.cyan::before { background: linear-gradient(90deg, #06b6d4, #38bdf8); }
+    .kpi-card.indigo::before { background: linear-gradient(90deg, #6366f1, #818cf8); }
+    .kpi-card.emerald::before { background: linear-gradient(90deg, #10b981, #34d399); }
+    .kpi-card.amber::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .kpi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .kpi-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .kpi-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kpi-card.cyan .kpi-icon { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }
+    .kpi-card.indigo .kpi-icon { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+    .kpi-card.emerald .kpi-icon { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .kpi-card.amber .kpi-icon { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+
+    .kpi-val {
+      font-size: 21px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .kpi-bottom {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 10.5px;
+    }
+
+    .trend-badge {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .trend-up {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    .trend-neutral {
+      color: #94a3b8;
+    }
+
+    /* Middle Analytics & Drives Section */
+    .dashboard-mid-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .chart-panel, .drives-panel {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .panel-header h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .panel-tag {
+      font-size: 10px;
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .chart-box {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 90px;
+    }
+
+    .dept-bars-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #1e293b;
+    }
+
+    .dept-stat {
+      font-size: 10px;
+    }
+
+    .dept-stat-header {
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .dept-progress {
+      height: 4px;
+      background: #1e293b;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .dept-bar {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    /* Upcoming Drives List */
+    .drives-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .drive-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #131b2e;
+      border: 1px solid #1e293b;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+
+    .drive-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .company-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 11px;
+      color: #fff;
+    }
+
+    .logo-zoho { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+    .logo-cognizant { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .logo-tcs { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .logo-kaar { background: linear-gradient(135deg, #10b981, #059669); }
+
+    .drive-info h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .drive-info p {
+      font-size: 10px;
+      color: #64748b;
+    }
+
+    .drive-right {
+      text-align: right;
+    }
+
+    .drive-ctc {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    .drive-date {
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    /* Candidate Pipeline Table Section */
+    .table-panel {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .table-top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-select {
+      background: #131b2e;
+      border: 1px solid #23314d;
+      color: #cbd5e1;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .export-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .table-container {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+
+    .table-container th {
+      text-align: left;
+      padding: 7px 10px;
+      color: #64748b;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .table-container td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #141f32;
+      color: #cbd5e1;
+    }
+
+    .table-container tr:last-child td {
+      border-bottom: none;
+    }
+
+    .mono-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #38bdf8;
+    }
+
+    .student-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .student-badge-initial {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .student-name {
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .cgpa-pill {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .cgpa-high { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .cgpa-good { background: rgba(6, 182, 212, 0.15); color: #38bdf8; }
+
+    .skills-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .skill-tag {
+      background: #131b2e;
+      border: 1px solid #23314d;
+      font-size: 9.5px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: #94a3b8;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .status-selected {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-interview {
+      background: rgba(6, 182, 212, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .status-shortlisted {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">CP</div>
+      <div class="brand-info">
+        <h1>CPMS Enterprise</h1>
+        <p>AIT Placement Cell</p>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Core Modules</div>
+      <div class="nav-item active">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Dashboard</span>
+        <span class="badge">Live</span>
+      </div>
+      <div class="nav-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+        <span>Students</span>
+        <span class="badge">842</span>
+      </div>
+      <div class="nav-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        <span>Recruiters</span>
+        <span class="badge">48</span>
+      </div>
+      <div class="nav-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+        <span>Campus Drives</span>
+        <span class="badge">12</span>
+      </div>
+      <div class="nav-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Analytics</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar">MS</div>
+      <div class="user-details">
+        <h4>Mathan S</h4>
+        <p>Lead Dev & Admin</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main View -->
+  <div class="main-wrapper">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Search students, roll no, drive...</span>
+        <kbd>Ctrl K</kbd>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="college-pill">
+          <span class="dot"></span>
+          <span>Adithya Institute of Technology (2023–2027)</span>
+        </div>
+        <button class="btn-create">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>New Drive</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="content-area">
+      <div class="page-header">
+        <div class="page-title">
+          <h2>Campus Placement Analytics & Shortlisting</h2>
+          <p>Real-time candidate pipeline, recruitment metrics & corporate drive management</p>
+        </div>
+        <div class="date-filter">
+          <div class="date-pill active">Phase 1 (2026–27)</div>
+          <div class="date-pill">Reports</div>
+        </div>
+      </div>
+
+      <!-- 4 KPI Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card cyan">
+          <div class="kpi-top">
+            <span class="kpi-label">Registered</span>
+            <div class="kpi-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+          <div class="kpi-val">842</div>
+          <div class="kpi-bottom">
+            <span class="trend-badge trend-up">↑ 100% Verified</span>
+            <span class="trend-neutral">CSE, IT, ECE</span>
+          </div>
+        </div>
+
+        <div class="kpi-card emerald">
+          <div class="kpi-top">
+            <span class="kpi-label">Placement Rate</span>
+            <div class="kpi-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline></svg>
+            </div>
+          </div>
+          <div class="kpi-val">76.4%</div>
+          <div class="kpi-bottom">
+            <span class="trend-badge trend-up">↑ +12.8%</span>
+            <span class="trend-neutral">382 placed</span>
+          </div>
+        </div>
+
+        <div class="kpi-card indigo">
+          <div class="kpi-top">
+            <span class="kpi-label">Highest Package</span>
+            <div class="kpi-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+          </div>
+          <div class="kpi-val">₹18.5 LPA</div>
+          <div class="kpi-bottom">
+            <span class="trend-badge trend-up">Amazon SDE</span>
+            <span class="trend-neutral">Avg: ₹6.80 LPA</span>
+          </div>
+        </div>
+
+        <div class="kpi-card amber">
+          <div class="kpi-top">
+            <span class="kpi-label">Active Drives</span>
+            <div class="kpi-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+          </div>
+          <div class="kpi-val">12 Companies</div>
+          <div class="kpi-bottom">
+            <span class="trend-badge trend-up">48 Onboarded</span>
+            <span class="trend-neutral">Zoho, TCS, CTS</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Middle Row: Analytics Chart & Upcoming Drives -->
+      <section class="dashboard-mid-row">
+        <!-- Recruitment Distribution Chart -->
+        <div class="chart-panel">
+          <div class="panel-header">
+            <h3>Recruitment Progression (MySQL Live)</h3>
+            <span class="panel-tag">Real-time</span>
+          </div>
+          <div class="chart-box">
+            <svg class="chart-svg" viewBox="0 0 500 90" fill="none">
+              <defs>
+                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="20" x2="500" y2="20" stroke="#1e293b" stroke-dasharray="3"/>
+              <line x1="0" y1="50" x2="500" y2="50" stroke="#1e293b" stroke-dasharray="3"/>
+              <path d="M0,80 Q70,60 140,50 T280,30 T400,20 T500,10 L500,90 L0,90 Z" fill="url(#chartGrad)"/>
+              <path d="M0,80 Q70,60 140,50 T280,30 T400,20 T500,10" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="280" cy="30" r="4" fill="#06b6d4" stroke="#080c14" stroke-width="2"/>
+              <circle cx="500" cy="10" r="4" fill="#38bdf8" stroke="#080c14" stroke-width="2"/>
+            </svg>
+          </div>
+          <!-- Department Bars -->
+          <div class="dept-bars-row">
+            <div class="dept-stat">
+              <div class="dept-stat-header"><span>CSE</span><span>84%</span></div>
+              <div class="dept-progress"><div class="dept-bar" style="width: 84%; background: #06b6d4;"></div></div>
+            </div>
+            <div class="dept-stat">
+              <div class="dept-stat-header"><span>IT</span><span>78%</span></div>
+              <div class="dept-progress"><div class="dept-bar" style="width: 78%; background: #6366f1;"></div></div>
+            </div>
+            <div class="dept-stat">
+              <div class="dept-stat-header"><span>ECE</span><span>72%</span></div>
+              <div class="dept-progress"><div class="dept-bar" style="width: 72%; background: #10b981;"></div></div>
+            </div>
+            <div class="dept-stat">
+              <div class="dept-stat-header"><span>Mech</span><span>65%</span></div>
+              <div class="dept-progress"><div class="dept-bar" style="width: 65%; background: #f59e0b;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Campus Drives -->
+        <div class="drives-panel">
+          <div class="panel-header">
+            <h3>Upcoming Campus Drives</h3>
+            <span class="panel-tag">Next 14 Days</span>
+          </div>
+          <div class="drives-list">
+            <div class="drive-card">
+              <div class="drive-left">
+                <div class="company-logo logo-zoho">ZH</div>
+                <div class="drive-info">
+                  <h4>Zoho Corporation</h4>
+                  <p>SDE • Min 7.0 CGPA</p>
+                </div>
+              </div>
+              <div class="drive-right">
+                <div class="drive-ctc">₹8.5 LPA</div>
+                <div class="drive-date">Oct 28</div>
+              </div>
+            </div>
+
+            <div class="drive-card">
+              <div class="drive-left">
+                <div class="company-logo logo-cognizant">CTS</div>
+                <div class="drive-info">
+                  <h4>Cognizant (GenC)</h4>
+                  <p>Full Stack • Min 6.5</p>
+                </div>
+              </div>
+              <div class="drive-right">
+                <div class="drive-ctc">₹4.5 LPA</div>
+                <div class="drive-date">Nov 02</div>
+              </div>
+            </div>
+
+            <div class="drive-card">
+              <div class="drive-left">
+                <div class="company-logo logo-tcs">TCS</div>
+                <div class="drive-info">
+                  <h4>TCS (Digital Track)</h4>
+                  <p>Software Engineer</p>
+                </div>
+              </div>
+              <div class="drive-right">
+                <div class="drive-ctc">₹7.0 LPA</div>
+                <div class="drive-date">Nov 08</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Row: Candidate Pipeline Table -->
+      <section class="table-panel">
+        <div class="table-top-controls">
+          <div class="filter-pills">
+            <span style="font-size: 12.5px; font-weight: 700; color: #fff; margin-right: 6px;">Candidate Pipeline</span>
+            <select class="filter-select"><option>B.E. Computer Science</option></select>
+            <select class="filter-select"><option>CGPA >= 7.0</option></select>
+          </div>
+          <button class="export-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Export CSV</span>
+          </button>
+        </div>
+
+        <table class="table-container">
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Student Name</th>
+              <th>Department</th>
+              <th>CGPA</th>
+              <th>Skills</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono-id">710123104042</td>
+              <td>
+                <div class="student-meta">
+                  <div class="student-badge-initial" style="background: rgba(99, 102, 241, 0.2); color: #818cf8;">MS</div>
+                  <span class="student-name">Mathan S</span>
+                </div>
+              </td>
+              <td>B.E. CSE</td>
+              <td><span class="cgpa-pill cgpa-good">7.04</span></td>
+              <td>
+                <div class="skills-row">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Node</span>
+                  <span class="skill-tag">MySQL</span>
+                </div>
+              </td>
+              <td><span class="status-badge status-selected">● Shortlisted (GenC)</span></td>
+            </tr>
+            <tr>
+              <td class="mono-id">710123104018</td>
+              <td>
+                <div class="student-meta">
+                  <div class="student-badge-initial">AK</div>
+                  <span class="student-name">Ananya Krishnan</span>
+                </div>
+              </td>
+              <td>B.E. CSE</td>
+              <td><span class="cgpa-pill cgpa-high">8.92</span></td>
+              <td>
+                <div class="skills-row">
+                  <span class="skill-tag">Java</span>
+                  <span class="skill-tag">Python</span>
+                </div>
+              </td>
+              <td><span class="status-badge status-interview">● Round 2 (Zoho)</span></td>
+            </tr>
+            <tr>
+              <td class="mono-id">710123104055</td>
+              <td>
+                <div class="student-meta">
+                  <div class="student-badge-initial">VK</div>
+                  <span class="student-name">Vignesh Kumar</span>
+                </div>
+              </td>
+              <td>B.E. IT</td>
+              <td><span class="cgpa-pill cgpa-good">7.45</span></td>
+              <td>
+                <div class="skills-row">
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">Mongo</span>
+                </div>
+              </td>
+              <td><span class="status-badge status-shortlisted">● Aptitude Cleared</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>
