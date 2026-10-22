@@ -615,48 +615,62 @@ function initStatsCounter() {
 
   let animated = false;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        statItems.forEach(item => {
-          const target = parseFloat(item.getAttribute('data-target'));
-          const isDecimal = item.getAttribute('data-decimal') === 'true';
-          const duration = 1800; // ms
-          const startTime = performance.now();
+  function triggerAnimation() {
+    if (animated) return;
+    animated = true;
+    statItems.forEach(item => {
+      const target = parseFloat(item.getAttribute('data-target'));
+      const isDecimal = item.getAttribute('data-decimal') === 'true';
+      const duration = 1800; // ms
+      const startTime = performance.now();
 
-          function updateCounter(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            const currentVal = easeOut * target;
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentVal = easeOut * target;
 
+        if (item.childNodes.length > 0) {
+          if (isDecimal) {
+            item.childNodes[0].nodeValue = currentVal.toFixed(2);
+          } else {
+            item.childNodes[0].nodeValue = Math.floor(currentVal);
+          }
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          if (item.childNodes.length > 0) {
             if (isDecimal) {
-              item.childNodes[0].nodeValue = currentVal.toFixed(2);
+              item.childNodes[0].nodeValue = target.toFixed(2);
             } else {
-              item.childNodes[0].nodeValue = Math.floor(currentVal);
-            }
-
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            } else {
-              if (isDecimal) {
-                item.childNodes[0].nodeValue = target.toFixed(2);
-              } else {
-                item.childNodes[0].nodeValue = target;
-              }
+              item.childNodes[0].nodeValue = target;
             }
           }
+        }
+      }
 
-          requestAnimationFrame(updateCounter);
-        });
+      requestAnimationFrame(updateCounter);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        triggerAnimation();
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.1 });
 
   const statsSection = document.querySelector('.hero-stats');
   if (statsSection) {
     observer.observe(statsSection);
+    // Check if statsSection is already in view on load
+    const rect = statsSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      triggerAnimation();
+    }
   }
 }
